@@ -35,13 +35,13 @@ function result() {
     let z = storyText.indexOf(':insertz');
     let xx = storyText.lastIndexOf(':insertx');
     
-    newStory = newStory.replace(storyText.slice(x,':insertx'.length+x), xItem);
+    newStory = newStory.replace(storyText.slice(x,':insertx:'.length+x), xItem);
 
-    newStory = newStory.replace(storyText.slice(y,':inserty'.length+y), yItem);
+    newStory = newStory.replace(storyText.slice(y,':inserty:'.length+y), yItem);
     
-    newStory = newStory.replace(storyText.slice(z,':insertz'.length+z), zItem);
+    newStory = newStory.replace(storyText.slice(z,':insertz:'.length+z), zItem);
 
-    newStory = newStory.replace(storyText.slice(xx,':insertx'.length+xx), xItem);
+    newStory = newStory.replace(storyText.slice(xx,':insertx:'.length+xx), xItem);
 
     
 
