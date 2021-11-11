@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Object basics: Task 2</title>
+    <style>
+      p {
+        color: purple;
+        margin: 0.5em 0;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <section class="preview">
+
+
+
+    </section>
+
+  </body>
+  <script>
+    let bandInfo;
+
+    // Add your code here
+    let francBestBand = {
+        name: 'Michael learns to Rock',
+        nationality: 'Denmark',
+        genre: 'Rock',
+        members: 3,
+        formed: 1988,
+        split: false,
+        albums: [
+            { 
+            name: 'Michael Learns to Rock',
+            released:1991
+            },
+            {
+            name:'Colours',
+            released: 1993
+            },
+            {
+            name: 'Played on Pepper',
+            released:1995
+            },
+            {
+            name: 'Nothing to Lose',
+            released: 1997
+            },
+            {
+            name:'Blue Night',
+            released: 2000
+            },
+            {
+            name: 'Michael Learns to Rock', 
+            released: 2004
+            },
+            {
+            name: 'Eternity', 
+            released: 2008
+            },
+            {
+            name: 'Scandinavia', 
+            released: 2012
+            },
+            {
+            name: 'STILL', 
+            released: 2018
+            }
+        ]
+    };
+
+    bandInfo = `My best band remains ${francBestBand.name} that originated from ${francBestBand.nationality}. 
+    They have been active ${francBestBand.formed} and their gnere is ${francBestBand.genre}. I enjoyed their
+    album ${francBestBand.albums[4]['name']} released in ${francBestBand.albums[4]['released']}.`;
+
+
+    // Don't edit the code below here!
+
+    const section = document.querySelector('section');
+    let para1 = document.createElement('p');
+    para1.textContent = bandInfo;
+    section.appendChild(para1);
+  </script>
+
+</html>
