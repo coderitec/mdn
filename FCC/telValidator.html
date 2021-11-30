@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>US Telephone Number Validator</title>
+</head>
+<body>
+    <script>
+        // 555-555-5555
+        // (555)555-5555
+        // (555) 555-5555
+        // 555 555 5555
+        // 5555555555
+        // 1 555 555 5555
+        function telephoneCheck(str) {
+        let oneTest = /^[1]{1}\d{10}/g;
+
+            let twoTest = /^[\d]{10}$/;
+
+            let threeTest = /^[1]\s+[\d]{3}\s+[\d]{3}\s+[\d]{4}/;
+
+            let fourTest = /(\d{3}-){2}\d{4}$/;
+
+            let fiveTest = /^[1]*\s*([(]\d{3}[)]){1}-*\s*(\d{3})-*\s*(\d{4})$/;
+
+            let sixTest = /^([(]\d{3}[-])/;
+
+            if (oneTest.test(str) ) {
+                return true;
+            }
+            else if (sixTest.test(str)) {
+                return false;
+            }
+            else if (twoTest.test(str)) {
+                return true;
+            }
+            else if (threeTest.test(str)) {
+                return true;
+            }
+            else if (fourTest.test(str)) {
+                return true;
+            }
+            else if (fiveTest.test(str)) {
+                return true;
+            }
+            
+            return false;
+            }
+
+
+    </script>
+</body>
+</html>

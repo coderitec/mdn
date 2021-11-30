@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>palindrom checker</title>
+</head>
+<body>
+    <script>
+        function palindrom(str) {
+            let reg = /[a-z0-9]/i;
+                let strArr = [];
+                let nonStr = [];
+                for(let i = 0; i < str.length; i++){
+
+                    let letter = str[i].toLowerCase();
+                    
+                    if(reg.test(letter)){
+                        strArr.unshift(letter);
+                    }
+                    else{
+                        nonStr.push(letter);
+                    }
+                }
+                let x = strArr.slice();
+                x = x.reverse().join('');
+
+                let y = strArr.join(''); 
+
+                if(x !== y){
+                    return false;
+                    }
+                    return true;
+                    }
+    </script>
+</body>
+</html>

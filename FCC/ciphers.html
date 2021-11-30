@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caeser Cipher</title>
+</head>
+<body>
+   
+    <script>
+        function rot13(str) {
+            
+            let arrOfAlphabets = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O',
+            'P','Q','R','S','T','U','V','W','X','Y','Z']; 
+
+            let newWord = [];
+            
+            let reg = /[a-z]/i;
+
+           for (let a = 0; a < str.length; a++) {
+               let letter = str[a].toUpperCase();
+              if(reg.test(letter)){
+                  if (arrOfAlphabets.indexOf(letter) < 13) {
+                      newWord.push(arrOfAlphabets[arrOfAlphabets.indexOf(letter)+13]);
+                  }
+                  else if(arrOfAlphabets.indexOf(letter) >= 13){
+                    newWord.push(arrOfAlphabets[arrOfAlphabets.indexOf(letter)
+                    +13-26]);
+                  }
+              }
+              else{
+                  newWord.push(str[a]);
+              }
+               
+           }
+            return newWord.join('');
+            }
+
+            
+    </script>
+</body>
+</html>

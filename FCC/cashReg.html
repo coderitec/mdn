@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Cash Register</title>
+    </head>
+    <body>
+        
+        <script>
+            function checkCashRegister(price, cash, cid) {
+            let final = {};
+            let cidTotal = 0;
+            // z = 0;
+            let change = cash - price;
+            let sample = {
+                Penny	:0.01, 
+                Nickel	:0.05,
+                Dime	:0.1,
+                Quarter	:0.25,
+                Dollar	:1,
+                Five    :5 ,
+                Ten 	:10,
+                Twenty 	:20,
+                Hundred :100
+            }
+
+            let constructorObject = newArr => {
+                return newArr.reduce((acc, val) =>{
+                    const [key, value] = val;
+                    acc[key] = value;
+                    return acc;
+                }, {});
+            };
+
+            let currency = constructorObject(cid);
+            
+            let arr = Object.keys(currency);
+            let arrC = Object.values(currency);
+            let arrO = Object.values(sample);
+            
+
+            for (let cu = 0; cu < cid.length; cu++) {
+                cidTotal += cid[cu][1];
+            }
+            if (cidTotal > change) {
+                final.status = 'OPEN';
+                final.change = [];
+
+                let x = cid.length;
+                for(; x >=0; x--){ 
+                    let check = arrC[x] * Math.floor(change/arrO[x]);
+                    // let check9 = arrC[7] * Math.floor(change/arrO[7]);
+                    // z = check9;
+                    if(check > change && change/arrC[x]<= 1){
+                        let y = (Math.floor(change/arrO[x]) * arrO[x]);
+                        change = change - y;
+                        final.change.push([arr[x],y ]);
+
+                    }    
+                    if(check > change && change/arrC[x]> 1){
+                        change -= arrC[x];
+                        final.change.push([arr[x],arrC[x] ]);
+                    }
+                }
+            }
+            if (cidTotal === change) {
+                final.status = 'CLOSED';
+                final.change = cid;
+            }
+            if(cidTotal === change){
+                final.status = 'INSUFFICIENT_FUNDS';
+                final.change = [];
+            }
+            return final;
+            }
+    </script>
+</body>
+</html>

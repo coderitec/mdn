@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roman Figure Converter</title>
+</head>
+<body>
+    <script>
+        function romanConverter(num) {
+             // convert num to string
+  //create an array of units,tens, hundreds, thousand
+  //check the length of each num in num
+  //if num length is 1, choose value from unit
+  // if num length is 2, the first number in num should be tens, the other number should be unit
+  //concatenate the val in tens with the value in unit
+  //equate the answer to num
+  //convert it to uppercase
+  let units = ['','I','II','III','IV','V','VI','VII','VIII','IX'];
+  let tens = ['','X','XX','XXX','XL','L','LX','LXX','LXXX','XC'];
+  let hundreds = ['','C','CC','CCC','CD','D','DC','DCC','DCCC','CM'];
+  let thousands = ['','M','MM','MMM','MV','V'];
+  
+  num = num.toString();
+
+  
+
+  if (num.length === 4) {
+      let thtt = thousands[Number(num[0])];
+      let hhhh = hundreds[Number(num[1])];
+      let tttt = tens[Number(num[2])];
+      let uuuu = units[Number(num[3])];
+
+      num = thtt + hhhh + tttt + uuuu;
+  }
+  
+ else if (num.length === 3) {
+      let hhh = hundreds[Number(num[0])];
+      let ttt = tens[Number(num[1])];
+      let uuu = units[Number(num[2])];
+      
+      num = hhh + ttt + uuu;
+    }
+   else if (num.length === 2) {
+      let tt = tens[Number(num[0])];
+      let uu = units[Number(num[1])];
+      
+      num = tt + uu;
+    }
+
+  else{
+    num = units[Number(num[0])];
+  }
+ return num;
+}
+    </script>
+</body>
+</html>
