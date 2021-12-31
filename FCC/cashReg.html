@@ -10,70 +10,128 @@
         
         <script>
             function checkCashRegister(price, cash, cid) {
-            let final = {};
-            let cidTotal = 0;
+            // let final = {};
             // z = 0;
-            let change = cash - price;
-            let sample = {
-                Penny	:0.01, 
-                Nickel	:0.05,
-                Dime	:0.1,
-                Quarter	:0.25,
-                Dollar	:1,
-                Five    :5 ,
-                Ten 	:10,
-                Twenty 	:20,
-                Hundred :100
-            }
+            let changes = Math.round(cash*100) - Math.round(price*100);
+            let cashOnHand = {};
+            let cashToGive = {};
 
-            let constructorObject = newArr => {
-                return newArr.reduce((acc, val) =>{
-                    const [key, value] = val;
-                    acc[key] = value;
-                    return acc;
-                }, {});
-            };
+            let sample = [
+                ['PENNY', 1], 
+                ['NICKEL', 5],
+                ['DIME', 10],
+                ['QUARTER', 25],
+                ['ONE', 100],
+                ['FIVE', 500],
+                ['TEN' , 1000],
+                ['TWENTY' ,2000],
+                ['HUNDERED', 10000]
+            ];
 
-            let currency = constructorObject(cid);
-            
-            let arr = Object.keys(currency);
-            let arrC = Object.values(currency);
-            let arrO = Object.values(sample);
-            
+            cid.forEach(function(denom) {
+                cashOnHand[denom[0]] = Math.round(denom[1] * 100);
+            });
 
-            for (let cu = 0; cu < cid.length; cu++) {
-                cidTotal += cid[cu][1];
-            }
-            if (cidTotal > change) {
-                final.status = 'OPEN';
-                final.change = [];
+            let index = sample.length - 1;
 
-                let x = cid.length;
-                for(; x >=0; x--){ 
-                    let check = arrC[x] * Math.floor(change/arrO[x]);
-                    // let check9 = arrC[7] * Math.floor(change/arrO[7]);
-                    // z = check9;
-                    if(check > change && change/arrC[x]<= 1){
-                        let y = (Math.floor(change/arrO[x]) * arrO[x]);
-                        change = change - y;
-                        final.change.push([arr[x],y ]);
+            while (index >= 0 && changes > 0 ){
+                let moneyN = sample[index][0];
+                let moneyV = sample[index][1];
 
-                    }    
-                    if(check > change && change/arrC[x]> 1){
-                        change -= arrC[x];
-                        final.change.push([arr[x],arrC[x] ]);
+                if( changes - moneyV > 0 && cashOnHand[moneyN], changes){
+                    cashToGive[moneyN] = 0;
+                    while (cashOnHand[moneyN] > 0 && changes - moneyV >= 0){
+                        cashOnHand[moneyN] -= moneyV;
+                        cashToGive[moneyN] += moneyV;
+                        changes -= moneyV;
                     }
                 }
+                index -= 1;
             }
-            if (cidTotal === change) {
-                final.status = 'CLOSED';
-                final.change = cid;
-            }
-            if(cidTotal === change){
-                final.status = 'INSUFFICIENT_FUNDS';
-                final.change = [];
-            }
-            return final;
+
+            if (changes === 0) {
+                let isEmpty = true;
+
+                Object.keys(cashOnHand).forEach(function(moneyType) {
+                    if (cashOnHand[moneyType] > 0) {
+                        isEmpty = false;
+                    }
+                });
+                if (isEmpty) {
+                    return {
+                        status: "CLOSED", 
+                        change: cid
+                    }
+                }
+                    else{
+                        let changeArray = [];
+                        Object.keys(cashToGive).map(function(moneyType) {
+                            if (cashToGive[moneyType] > 0) {
+                                changeArray.push([moneyType, cashToGive[moneyType] / 100]);
+                            };
+                        });
+                        return {status: 'OPEN', change: changeArray} 
+                    }
+                }
+
+        
+            return {status: 'INSUFFICIENT_FUNDS', change: []} 
+
+                // for(let money of monies){
+                //     cidTotal += (money[1]*100);
+                // }
+                // if (change > cidTotal) {
+                //     return {status = 'INSUFFICIENT_FUNDS', change: []}
+                // }
+                // else if (change === cidTotal) {
+                //     return {status = 'CLOSED', change: cid}
+                // }
+                // else{
+                //     cid = cid.reverse();
+                //     for(let one of many){
+                //         one[1] = one[1]*100;
+                //         while 
+                //     }
+                // }
+
+            // let constructorObject = newArr => {
+            //     return newArr.reduce((acc, val) =>{
+            //         const [key, value] = val;
+            //         acc[key] = value;
+            //         return acc;
+            //     }, {});
+            // };
+
+            // let currency = constructorObject(cid);
+            
+            // let arr = Object.keys(currency);
+            // let arrC = Object.values(currency);
+            // let arrO = Object.values(sample);
+            
+
+            // for (let cu = 0; cu < cid.length; cu++) {
+            //     cidTotal += cid[cu][1]*100;
+                
+            //     if (cidTotal === change) {
+            //         final.status = 'CLOSED'
+            //     }
+            //     if (cidTotal < change ) {
+            //         final.status = 'INSUFFICIENT_FUNDS'
+            //     }
+            //     if (cidTotal > change) {
+            //         if (change % cid[cu][1] !==0) {
+            //         final.status = 'INSUFFICIENT_FUNDS'
+                        
+            //         }
+            //         else{
+            //         final.status = 'OPEN'
+
+            //         }
+            //     }
+                
+            // }
+            // return final;
+            // console.log(cidTotal)
             }
     </script>
 </body>
