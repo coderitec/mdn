@@ -8,31 +8,29 @@
 </head>
 <body>
     <script>
-        function palindrom(str) {
-            let reg = /[a-z0-9]/i;
-                let strArr = [];
-                let nonStr = [];
-                for(let i = 0; i < str.length; i++){
+        function palindrome(str) {
+            //convert the str to lowercase
+            //create a regex to check if each character is a text or number
+            //create an empty array
+            // loop through each element in the string
+            //if an element an alphanumeric, push inside the array
+            //make a copy of the array
+            //reverse the new copy
+            //convert the two arrays to a string
+            //check if both are the same
+            str = str.toLowerCase();
+            let regex = /[a-z0-9]/i;
+            let arr = [];
+            for(let i = 0; i < str.length; i++){
+            if(regex.test(str[i])){
+                arr.push(str[i]);
+            }
+            }
+            let newArr = arr.slice();
+            newArr.reverse();
 
-                    let letter = str[i].toLowerCase();
-                    
-                    if(reg.test(letter)){
-                        strArr.unshift(letter);
-                    }
-                    else{
-                        nonStr.push(letter);
-                    }
-                }
-                let x = strArr.slice();
-                x = x.reverse().join('');
-
-                let y = strArr.join(''); 
-
-                if(x !== y){
-                    return false;
-                    }
-                    return true;
-                    }
+            return arr.join('')===newArr.join('');
+            }
     </script>
 </body>
 </html>
